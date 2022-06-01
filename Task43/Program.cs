@@ -21,7 +21,6 @@ LineFunction GetFactors(string equationNumber)
 }
 
 LineFunction equation1, equation2;
-double pointX, pointY;
 
 Console.Clear();
 Console.WriteLine("Найдём точку пересечения двух прямых,");
@@ -37,11 +36,22 @@ Console.WriteLine();
 
 equation1 = GetFactors("1");
 equation2 = GetFactors("2");
+if (equation1.k == equation2.k)
+{
+    Console.WriteLine("Прямые y={0}*x + {1} и y={2}*x + {3} параллельны.",
+                    equation1.k, equation1.b, 
+                    equation2.k, equation2.b);
+    Console.WriteLine("Точки пересечения нет.");
+}
+else
+{
+    double pointX, pointY;
+    (pointX, pointY) = FindCrossPoint(equation1, equation2);
+    Console.WriteLine();
 
-(pointX, pointY) = FindCrossPoint(equation1, equation2);
-Console.WriteLine();
+    Console.WriteLine("Координаты точки пересечения = ({0} , {1}).", Math.Round(pointX, 1), Math.Round(pointY, 1));
+}
 
-Console.WriteLine("Координаты точки пересечения = ({0} , {1}).", Math.Round(pointX, 1), Math.Round(pointY, 1));
 
 
 public record struct LineFunction // y = k * x + b
